@@ -1,0 +1,623 @@
+/* ============================================================
+   App.css — Thème "Carte douce" (araka ny sary)
+   Palette : beige #fbefe3 · blanc #fff · indigo #5a6bd8
+             vert #4cb86b · rose #fdf1ef · jaune #fffaea · bleu #eef6fd
+   ============================================================ */
+
+/* ---------- 1. Réinitialisation ---------- */
+* {
+  box-sizing: border-box; /* ny largeur dia mampiditra ny padding sy ny bordure */
+}
+
+/* ---------- 2. Background ny page manontolo ---------- */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2d2f3a;
+  /* Gradient beige malefaka */
+  background: linear-gradient(135deg, #fbefe3 0%, #f8f1ea 50%, #fdf6ee 100%);
+  background-attachment: fixed; /* tsy mihetsika ny background rehefa manao scroll */
+}
+
+/* ---------- 3. Conteneur principal : carte fotsy lehibe ---------- */
+.application {
+  width: min(1000px, 94%);
+  margin: 40px auto;
+  padding: 28px 28px 32px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 18px 50px #785a3c26, 0 2px 6px #0000000a;
+}
+
+/* ---------- 4. En-tête ---------- */
+.entete {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+/* Titre "Ma Todo List" : majuscule, mivaingana */
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #2d2f3a;
+}
+
+/* Barre de progression ankapobeny */
+.progression {
+  max-width: 300px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+/* Ny barre ivelany (fond ny barre de progression) */
+.barre {
+  height: 6px;
+  margin-top: 6px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+/* Ny ampahany feno : maitso */
+.barre-remplie {
+  height: 100%;
+  background: #4cb86b;
+  border-radius: 99px;
+  transition: width 0.4s ease; /* animation rehefa mitombo ny pourcentage */
+}
+
+/* ---------- 5. Barre d'outils : recherche + bouton ---------- */
+.barre-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Champ de recherche : input + icône filtre ao anatiny */
+.champ-recherche {
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  background: #ffffff;
+  border: 1px solid #d9dce6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Rehefa misy focus ao anatin'ny champ : contour indigo */
+.champ-recherche:focus-within {
+  border-color: #5a6bd8;
+  box-shadow: 0 0 0 3px #5a6bd833;
+}
+
+/* Input ao anatin'ny champ de recherche (tsy misy bordure fa ny conteneur no mitondra azy) */
+.champ-recherche input {
+  flex: 1;
+  min-height: 42px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Icône filtre (décoration) */
+.icone-filtre {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 12px;
+  border-left: 1px solid #e5e7ee;
+  color: #6b7280;
+}
+
+/* ---------- 6. Formulaire (miseho rehefa tsindrina "+ Nouvelle tâche") ---------- */
+.form-tache {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* nom lehibe, deadline, priorité */
+  gap: 16px;
+  align-items: end;
+  margin-top: 18px;
+  padding: 20px;
+  border-radius: 14px;
+  background: #faf8f5;
+  border: 1px solid #e7e2da;
+  animation: apparition 0.25s ease;
+}
+
+/* Animation rehefa miseho ny formulaire */
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Label eo ambonin'ny input tsirairay */
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3b3f55;
+}
+
+/* Input sy select */
+input,
+select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px; /* IHM : cible tactile ampy */
+  padding: 10px 12px;
+  border: 1px solid #d0d4e0;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #2d2f3a;
+  font: inherit;
+  font-weight: 400;
+}
+
+input::placeholder {
+  color: #6b7280;
+}
+
+/* Hover : mampiseho fa azo tsindrina */
+input:hover,
+select:hover {
+  border-color: #9aa3c4;
+}
+
+/* Focus clavier : contour indigo hita mazava (IHM) */
+input:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #5a6bd8;
+  outline-offset: 2px;
+}
+
+/* ---------- 7. Bouton ---------- */
+
+/* Style fototra : indigo */
+button {
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  background: #5a6bd8;
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.12s, background 0.12s, box-shadow 0.12s;
+}
+
+/* Hover : miakatra kely (feedback) */
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Active : mijanona rehefa tsindrina */
+button:active {
+  transform: translateY(0);
+}
+
+/* Bouton ao anaty formulaire (mameno ny largeur manontolo) */
+.boutons-formulaire {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Bouton principal "+ Nouvelle tâche" */
+.bouton-principal {
+  background: #5a6bd8;
+  color: #ffffff;
+  box-shadow: 0 4px 10px #5a6bd84d;
+}
+
+.bouton-principal:hover {
+  background: #4a5bc8;
+}
+
+/* Bouton "Annuler" : blanc */
+.bouton-annuler {
+  background: #ffffff;
+  color: #3b3f55;
+  border-color: #cfd3e6;
+}
+
+.bouton-annuler:hover {
+  background: #f3f4fa;
+}
+
+/* Lien agenda "Planifier un créneau" : outline indigo */
+.bouton-calendrier {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1.5px solid #5a6bd8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #5a6bd8;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.12s, background 0.12s;
+}
+
+.bouton-calendrier:hover {
+  background: #eef0fd;
+  transform: translateY(-1px);
+}
+
+/* ---------- 8. Titre "Mes tâches" ---------- */
+/* Afenina amin'ny maso fa mbola hita amin'ny lecteur d'écran (accessibilité) */
+.titre-grilles {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- 9. Colonnes de priorité ---------- */
+
+/* Colonne telo mitovy largeur */
+.grilles-taches {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+/* Colonne tsirairay */
+.grille {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden; /* mba hanaraka ny radius ny bandeau */
+  border: 1px solid #d9dce6;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Bandeau d'en-tête ny colonne (ex. "🔥 URGENT (3)") */
+.grille h2 {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3b3f55;
+}
+
+/* Compteur (raha mbola misy ao amin'ny JSX) */
+.compteur {
+  margin: 0;
+  padding-top: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Urgent : rose */
+.grille-urgent {
+  border-color: #e9a9a3;
+  background: #fdf1ef;
+}
+.grille-urgent h2 {
+  background: #f8d9d5;
+}
+
+/* Très important : jaune */
+.grille-très-important {
+  border-color: #ecd98c;
+  background: #fffaea;
+}
+.grille-très-important h2 {
+  background: #fcf0c4;
+}
+
+/* Important : bleu */
+.grille-important {
+  border-color: #a8cbea;
+  background: #eef6fd;
+}
+.grille-important h2 {
+  background: #d5e7f8;
+}
+
+/* Message rehefa tsy misy tâche (état vide) */
+.vide {
+  margin: 0;
+  padding: 24px 16px 28px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+/* Icône lehibe ao amin'ny état vide */
+.vide-icone {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 56px;
+}
+
+/* ---------- 10. Carte de tâche ---------- */
+.carte-tache {
+  margin: 12px;
+  padding: 12px 14px;
+  border: 1px solid #ececf1;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #2d2f3a;
+  text-align: center;
+  overflow-wrap: anywhere; /* tapahina ny teny lava loatra */
+  box-shadow: 0 2px 6px #00000014;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+/* Hover eo amin'ny carte : miakatra kely */
+.carte-tache:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px #0000001f;
+}
+
+/* Nom ny tâche */
+.carte-tache h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Andalana misy ny deadline */
+.ligne-deadline {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.ligne-deadline strong {
+  font-weight: 500;
+}
+
+/* Carte terminée : bordure havia maitso + nom voasaron-tsipika */
+.carte-tache.terminee {
+  border-left: 4px solid #4cb86b;
+}
+
+.carte-tache.terminee h3 {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+/* Carte en cours : bordure havia jaune + background jaune malefaka */
+.carte-tache.en-cours {
+  border-left: 4px solid #fecb00;
+  background: #fffbea;
+}
+
+/* Deadline androany (tsy terminé) : bordure havia rouge vif */
+.carte-tache.echeance-aujourdhui {
+  border-left: 4px solid #ff0000;
+}
+
+/* Carte en retard (lasa ny deadline) : rouge tomate, soratra mainty (contraste) */
+.carte-tache.en-retard {
+  background-color: #ff6347;
+  border: 2px solid #d92d20;
+  color: #1a1a1a;
+}
+
+.carte-tache.en-retard h3,
+.carte-tache.en-retard p {
+  color: #1a1a1a;
+}
+
+/* Message d'alerte "Deadline dépassée !" */
+.alerte-retard {
+  margin: 10px 0 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: #7f1d1d;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* Andalana misy ny délai (ex. "Dans 2 jours") */
+.ligne-delai {
+  margin: 0 0 8px;
+}
+
+/* Badge délai : style fototra (mbola lavitra ny deadline) */
+.delai {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 99px;
+  background: #e8eaf8;
+  color: #3b3f55;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Deadline akaiky (1 hatramin'ny 3 andro) : jaune */
+.delai-proche {
+  background: #fde7a0;
+  color: #5c4300;
+}
+
+/* Deadline androany : rose + soratra rouge maizina */
+.delai-aujourdhui {
+  background: #fbd5d1;
+  color: #7f1d1d;
+}
+
+/* Efa tara : fotsy + bordure rouge (hita tsara na dia ambony carte rouge aza) */
+.delai-retard {
+  background: #ffffff;
+  color: #7f1d1d;
+  border: 1px solid #7f1d1d;
+}
+
+/* ---------- 11. Statut : endrika badge ---------- */
+
+/* Ny label "Statut" dia afenina (ny badge ihany no hita), fa ny select mbola misy */
+.carte-tache label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font-size: 0;
+}
+
+/* Select statut : endrika badge kely */
+.statut {
+  width: auto;
+  min-height: 26px;
+  margin: 0;
+  padding: 2px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* "Non commencé" : gris */
+.statut-non-commence {
+  background-color: #e8e8ee;
+  color: #3b3f55;
+}
+
+/* "En cours" : jaune */
+.statut-en-cours {
+  background-color: #fde7a0;
+  color: #5c4300;
+}
+
+/* "Terminé" : maitso */
+.statut-termine {
+  background-color: #c9efd3;
+  color: #1f6f3d;
+}
+
+/* Select verrouillé (tâche terminée) : badge madio, tsy misy zana-tsipika */
+.statut:disabled {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* ---------- 12. Bouton Modifier / Supprimer ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Bouton kely ao anaty carte */
+.actions button {
+  min-height: 34px;
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #ffffff;
+  color: #3b3f55;
+  border-color: #cfd3e6;
+}
+
+.actions button:hover {
+  background: #f3f4fa;
+}
+
+/* Bouton "Supprimer" : rouge malefaka */
+.actions .bouton-supprimer {
+  color: #b42318;
+  border-color: #f1b5b0;
+}
+
+.actions .bouton-supprimer:hover {
+  background: #fdecea;
+}
+
+/* ---------- 13. Responsive ---------- */
+
+/* Tablette */
+@media (max-width: 800px) {
+  .form-tache {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .champ-nom {
+    grid-column: 1 / -1; /* ny nom dia mameno ny ligne manontolo */
+  }
+
+  .grilles-taches {
+    grid-template-columns: 1fr; /* colonne mifanampy ambony */
+  }
+}
+
+/* Téléphone */
+@media (max-width: 480px) {
+  .application {
+    width: 96%;
+    margin: 16px auto;
+    padding: 18px 14px 22px;
+  }
+
+  .form-tache {
+    grid-template-columns: 1fr;
+  }
+
+  .barre-actions,
+  .boutons-formulaire {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .barre-actions button,
+  .boutons-formulaire button,
+  .bouton-calendrier {
+    width: 100%; /* bouton mameno ny largeur manontolo */
+  }
+}
+
+/* ---------- 14. Accessibilité ---------- */
+/* Esorina ny animation raha nangatahin'ny mpampiasa ao amin'ny système */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
